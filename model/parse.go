@@ -32,7 +32,7 @@ func Parse[T any](ctx context.Context, text string) (ObjectResult[T], error) {
 		},
 		{
 			Role:    llm.MessageRoleUser,
-			Content: fmt.Sprintf("Text: %s\nSchema: %s", text, jsonSchemaStr),
+			Content: fmt.Sprintf("Text:\n%s\n\nSchema:\n%s\n\nValid JSON:", text, jsonSchemaStr),
 		},
 	}, &llm.MessageOptions{
 		Temperature: 0.0,

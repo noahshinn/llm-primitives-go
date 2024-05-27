@@ -58,7 +58,7 @@ const (
 )
 
 type MessageOptions struct {
-	Temperature   float32  `json:"temperature"`
+	Temperature   float64  `json:"temperature"`
 	MaxTokens     int      `json:"max_tokens"`
 	StopSequences []string `json:"stop_sequences"`
 

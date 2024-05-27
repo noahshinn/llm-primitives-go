@@ -83,8 +83,14 @@ func (m *OpenAIModel) buildArgs(messages []*Message, options *MessageOptions) ma
 	if len(options.StopSequences) > 0 {
 		args["stop"] = options.StopSequences
 	}
+	var response_format_type string
 	if options.ForceJson {
-		args["response_format"] = map[string]string{"type": "json_object"}
+		response_format_type = "json_object"
+	} else {
+		response_format_type = "text"
+	}
+	args["response_format"] = map[string]string{
+		"type": response_format_type,
 	}
 	return args
 }
