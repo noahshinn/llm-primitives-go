@@ -33,9 +33,10 @@ func ScoreInt(ctx context.Context, instruction string, text string, minBound int
 	if err != nil {
 		return 0, fmt.Errorf("failed to generate a message from the llm: %w", err)
 	}
-	if score, ok := res.Obj["score"].(int); !ok {
-		return 0, errors.New("failed to parse score from response")
-	} else {
-		return score, nil
+	if s, ok := res.Obj["score"]; ok {
+		if score, ok := s.(float64); ok {
+			return int(score), nil
+		}
 	}
+	return 0, errors.New("failed to get a score from the llm")
 }
